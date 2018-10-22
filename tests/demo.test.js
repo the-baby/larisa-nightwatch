@@ -2,16 +2,11 @@ const config = require('config')
 const baseUrl = config.baseUrl
 const creds = config.creds.regularUser
 module.exports = {
-<<<<<<< Updated upstream
   'ConversationOne' : {
     'faq-generator': {
       before: (browser) => browser.maximizeWindow(),
       //after: (browser) => browser.end(),
-=======
-  'ZuzNow' : {
-    'google': { 
->>>>>>> Stashed changes
-      'Sign-in successfully leads to the Editor': (browser) => {
+       'Sign-in successfully leads to the Editor': (browser) => {
         browser
         .url(baseUrl + '/user/login')
         .waitForElementVisible('body', 1000)
@@ -26,7 +21,7 @@ module.exports = {
         .url(baseUrl + '/new')
         .waitForElementVisible('body', 1000)
         .click('#menu_new')
-        .pause(3000)
+        .pause(4000)
         .assert.elementPresent('#org-name')
         .pause(3000)
         .click('#closeTopMessageBar')
@@ -36,24 +31,73 @@ module.exports = {
         .pause(2000)
         .setValue('#org-name', 'MyTest')
         .pause(4000)
-        .assert.elementPresent('#btnNext')
+        .assert.visible('#btnNext')
         .click('#btnNext')
         .pause(2000)
-        .assert.elementPresent('.device-chatbot')
+        .assert.visible('.device-chatbot')
         .click('.device-chatbot')
-        .assert.elementPresent('#btnNext')
+        .assert.visible('#btnNext')
         .click('#btnNext')
-        .assert.elementPresent('.preintent[name="Contact"]')
+		.pause(2000)
+        .assert.visible('.preintent[name="Contact"]')
         .click('.preintent[name="Contact"]')
-        .pause(10000)
-        .assert.elementPresent('.publish-btn')
-        .click('.publish-btn')
+        .pause(15000)
+        .assert.visible('.publish-btn.btn.editor')
+        .click('.publish-btn.btn.editor')
         .assert.elementPresent('#bigNewIntentBtn')
-        
-        
-        
-      }    
-    }
-  }
+              
+      },
+	     
+      'Clicking the FAQ button opens the faq part in the Editor': (browser) => {
+        browser
+	    .pause(4000)
+		.click('#bigNewFaqBtn')
+		.pause(2000)
+      	.assert.visible('#faq_gen_generate')  
+     },
+	'Clicking the Generate button generates the list of questions asked by users': (browser) => {
+        browser
+		.pause(3000)
+		.setValue('#faq_url', 'https://www.ikea.com/ms/en_US/customer_service/faq/index.html')
+		.setValue('#wrap_selector', '.contentModule')
+		.pause(3000)
+		.setValue('#question_selector', 'h5')
+		.setValue('#answer_selector', 'span')
+		.click('#faq_gen_generate')
+		.pause(20000)
+		.assert.visible('.faqResult:nth-child(2) .question') 
+		
+  
+     },
+  'An error message appears when no intent is selected': (browser) => {
+        browser
+		.click('#faq_gen_import')
+		.pause(4000)
+		.assert.elementPresent('.jGrowl-notification') 
+     },
+	
+	'the selected intent is exported to the model': (browser) => {
+        browser
+		.pause(5000)
+		.click('.faqResult:nth-child(2) .faqChecker input')
+		.pause(8000)
+		.click('#faq_gen_import')
+		.assert.visible('.faqResult:nth-child(2) .question')
+		.pause(3000)
+		.click('#btnSave')
+		.pause(35000)
+		.click('#btnReset')
+		.pause(5000)
+		.assert.visible('.folder-link[name="FAQ"]')
+	},
+	
+	'It is possible to use the intent I added': (browser) => {
+        browser
+		.pause(2000)
+		.frame('chatbot_simulator')
+		.setValue('input', 'Do you have a delivery service')
+	}
+	}
+  } 
 };
-
+//.frame(iframe name)chatbot_container
