@@ -2,10 +2,15 @@ const config = require('config')
 const baseUrl = config.baseUrl
 const creds = config.creds.regularUser
 module.exports = {
+<<<<<<< Updated upstream
   'ConversationOne' : {
     'faq-generator': {
       before: (browser) => browser.maximizeWindow(),
       //after: (browser) => browser.end(),
+=======
+  'ZuzNow' : {
+    'google': { 
+>>>>>>> Stashed changes
       'Sign-in successfully leads to the Editor': (browser) => {
         browser
         .url(baseUrl + '/user/login')
@@ -51,3 +56,4 @@ module.exports = {
     }
   }
 };
+
