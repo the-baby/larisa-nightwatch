@@ -90,14 +90,19 @@ module.exports = {
 		.pause(5000)
 		.assert.visible('.folder-link[name="FAQ"]')
 	},
-	
 	'It is possible to use the intent I added': (browser) => {
         browser
 		.pause(2000)
 		.frame('chatbot_simulator')
 		.setValue('input', 'Do you have a delivery service')
-	}
+		.pause(3000)
+		.click('.submitBtn.form-control.c1Icon.c1Icon-paper-plane')
+		.pause(4000)
+		.assert.containsText('#conv-wrap', 'IKEA offers a flat rate online delivery service to your home or business starting at $9 for small item shipping and $39 for large item delivery.')
+	},
+	
+	
 	}
   } 
 };
-//.frame(iframe name)chatbot_container
+
