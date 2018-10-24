@@ -87,8 +87,8 @@ module.exports = {
 		.click('#btnSave')
 		.pause(35000)
 		.click('#btnReset')
-		.pause(5000)
-		.assert.visible('.folder-link[name="FAQ"]')
+		.pause(7000)
+		.assert.present('.folder-link[name="FAQ"]')
 	},
 	'It is possible to use the intent I added': (browser) => {
         browser
@@ -100,8 +100,32 @@ module.exports = {
 		.pause(4000)
 		.assert.containsText('#conv-wrap', 'IKEA offers a flat rate online delivery service to your home or business starting at $9 for small item shipping and $39 for large item delivery.')
 	},
+	'It is possible to select all intents and import them into a newly created folder':(browser) => {
+        browser
+		.frame(null)
+		.click('#bigNewFaqBtn')
+		.pause(3000)
+		.click('#faq_gen_header_selectAll>input')
+		.click('#faqFolderSelect')
+		.setValue('faq_new_folder', 'Test')
+		.pause(3000)
+		.click('#faq_gen_import')
+		.pause(20000)
+		.click('#bigNewFaqBtn')
+		.pause(5000)
+		.assert.elementNotPresent('.faqResult:nth-child(2)')
+		.assert.visible('.folder-link[name="Test"]')
 	
-	
+	},
+	'Clicking Delete button deletes the app':(browser) => {
+        browser
+		.click('#btnMyApps')
+		.pause(1000)
+		.click('#btnDelete')
+		.pause(1000)
+		.acceptAlert()
+		.pause(5000)
+	}
 	}
   } 
 };
