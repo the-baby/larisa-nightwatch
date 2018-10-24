@@ -31,7 +31,7 @@ const cfg = module.exports = {
         path :        "screenshots"
       },
       desiredCapabilities: {
-        browserName: "chrome"
+        browserName: "firefox"
       }
     }
   }
