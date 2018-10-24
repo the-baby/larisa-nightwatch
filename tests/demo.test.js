@@ -88,7 +88,7 @@ module.exports = {
 		.pause(35000)
 		.click('#btnReset')
 		.pause(7000)
-		.assert.present('.folder-link[name="FAQ"]')
+		.assert.elementPresent('.folder-link[name="FAQ"]')
 	},
 	'It is possible to use the intent I added': (browser) => {
         browser
