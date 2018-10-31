@@ -78,7 +78,7 @@ module.exports = {
 	
 	'the selected intent is exported to the model': (browser) => {
         browser
-		.pause(5000)
+		.pause(10000)
 		.click('.faqResult:nth-child(2) .faqChecker input')
 		.pause(8000)
 		.click('#faq_gen_import')
