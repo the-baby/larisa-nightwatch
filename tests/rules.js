@@ -64,7 +64,16 @@ module.exports = {
 	  .pause(10000)
 	  .assert.visible('.setName[set="1"]')
 	  
-	}
+	},
+	'Clicking the Edit button enables the editing of the set name': (browser) => {
+       browser
+	   .click('.btnRenameSet.btn')
+	   .assert.visible('setRenameInput')
+	},
+	'It is possible to enter a new name for the Set': (browser) => {
+       browser
+	  .clearValue ('setRenameInput')
+	}  
   }
 }
 }  
