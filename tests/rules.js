@@ -9,11 +9,11 @@ module.exports = {
        'Sign-in successfully leads to the Editor': (browser) => {
         browser
         .url(baseUrl + '/user/login')
-        .waitForElementVisible('body', 1000)
+        .waitForElementVisible('body', 4000)
         .setValue('#edit-name', 'larisa@zuznow.com')
         .setValue('#edit-pass', 'Lastweek1')
         .click('#edit-submit')
-        .pause(3000)
+        .pause(6000)
         .assert.visible('#s2id_domain_selection > a > span')
       },
 	  'Clicking the next button should open the Add sample screen': (browser) => {
@@ -68,12 +68,28 @@ module.exports = {
 	'Clicking the Edit button enables the editing of the set name': (browser) => {
        browser
 	   .click('.btnRenameSet.btn')
-	   .assert.visible('setRenameInput')
+	   .pause(5000)
+	   .assert.visible('.setRenameInput')
 	},
 	'It is possible to enter a new name for the Set': (browser) => {
        browser
-	  .clearValue ('setRenameInput')
-	}  
+	  .clearValue ('.setRenameInput')
+	  .setValue('.setRenameInput', 'Test set')
+	  .pause(5000)
+	  .click('.btnSaveSetInfo.btn')
+	  .pause(5000)
+	  .click('#btnReset')
+	  .pause(3000)
+	  .assert.visible('#rulesSetTableBody > tr:nth-child(2) > td.setName')
+	  .pause(3000)
+	},
+	'Clicking Delete button deletes the set': (browser) => {
+       browser
+	  .click('#rulesSetTableBody > tr.dd-handle.selected > td.setActions > div > button.btnDeleteSet.btn > i')
+      .acceptAlert()
+      .pause(3000)
+      .assert.elementNotPresent('//*[@id="rulesSetTableBody"]/tr[2]/td[2]')
+	}	  
   }
 }
 }  
