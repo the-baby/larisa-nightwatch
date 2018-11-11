@@ -74,10 +74,10 @@ module.exports = {
         browser
 		.pause(2000)
 		.url(function(result) { 
-		console.log("myurl is ->" + result)})
+		console.log(result)})
 		.frame('chatbot_simulator')
 		.url(function(result) { 
-		console.log("myurl is ->" + result)})
+		console.log(result)})
 		.setValue('#input', 'how can I call you?')
 		.pause(5000)
 		.click('.submitBtn.form-control.c1Icon. c1Icon-paper-plane')
